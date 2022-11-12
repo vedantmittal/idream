@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "873695872896",
+    "project_id": "idream-4e19c",
+    "storage_bucket": "idream-4e19c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873695872896:android:a9b5456a0deb1aca7fa365",
+        "android_client_info": {
+          "package_name": "com.example.idream"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873695872896-2jtufggjvab5on9o7rjlqfsn1lscbjc6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdmbyJkg8EuIMMovIOn3LVvQae1joE-EI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873695872896-2jtufggjvab5on9o7rjlqfsn1lscbjc6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
