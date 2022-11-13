@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                   context: context,
                   barrierDismissible: false,
                   builder: (BuildContext context) => dialogClass,
-                );
+                ).then((value) => setState(() {}));
               },
               child: Container(
                 decoration: BoxDecoration(
