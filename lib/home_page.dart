@@ -32,6 +32,8 @@ class _HomePageState extends State<HomePage> {
     "1st"
   ];
 
+  List<String> languageList = ["English is my preferred Language", "अंग्रेजी मेरी पसंदीदा भाषा है"];
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -55,41 +57,82 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(12)),
                   insetPadding:
                       const EdgeInsets.symmetric(horizontal: 25, vertical: 24),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Column(
-                          children: [
-                            Text(
-                              'Select Class',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline6!
-                                  .copyWith(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.w500),
-                            ),
-                            Wrap(
-                              runSpacing: 15,
-                              spacing: 15,
-                              children: [],
-                            )
-                          ],
-                        ),
-                        ElevatedButton(
-                          onPressed: () => Navigator.pop(context),
-                          style: ElevatedButton.styleFrom(
-                              minimumSize: const Size(double.infinity, 40)),
-                          child: Text(
-                            'Cancel',
-                            style: const TextStyle(color: Colors.white),
+                  child: StatefulBuilder(builder: (context, setState) {
+                    return Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Column(
+                            children: [
+                              Text(
+                                'Select Class',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6!
+                                    .copyWith(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w500),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 20.0),
+                                child: Wrap(
+                                  runSpacing: 20,
+                                  spacing: 15,
+                                  children: classList.map((e) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        defaultClassIndex =
+                                            classList.indexOf(e);
+                                        setState(() {});
+                                      },
+                                      child: Container(
+                                        height: 60,
+                                        width: 50,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: defaultClassIndex ==
+                                                        classList.indexOf(e)
+                                                    ? Colors.blue
+                                                    : Colors.black26),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: defaultClassIndex ==
+                                                    classList.indexOf(e)
+                                                ? Colors.blue[50]
+                                                : Colors.transparent),
+                                        child: Center(
+                                          child: Text(
+                                            e,
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.black45,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              )
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
+                          ElevatedButton(
+                            onPressed: () => Navigator.pop(context),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.grey[100],
+                                minimumSize: const Size(100, 40)),
+                            child: const Text(
+                              'Cancel',
+                              style: TextStyle(color: Colors.blue),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
                 );
                 showDialog(
                   context: context,
@@ -104,15 +147,15 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
-                  children: const [
+                  children:  [
                     Text(
-                      'Class 9',
-                      style: TextStyle(
+                      classList[defaultClassIndex],
+                      style: const TextStyle(
                           fontSize: 12,
                           color: Colors.blue,
                           fontWeight: FontWeight.w500),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.expand_more_sharp,
                       color: Colors.blue,
                     )
@@ -124,23 +167,116 @@ class _HomePageState extends State<HomePage> {
               width: 20,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                final Dialog dialogWithImage = Dialog(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12)),
+                  insetPadding:
+                  const EdgeInsets.symmetric(horizontal: 25, vertical: 24),
+                  child: StatefulBuilder(builder: (context, setState) {
+                    return Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Column(
+                            children: [
+                              Text(
+                                'Choose your preferred Language',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6!
+                                    .copyWith(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500),
+                              ),
+
+
+                              Padding(
+                                padding:
+                                const EdgeInsets.symmetric(vertical: 20.0),
+                                child: Column(
+                                  children: languageList.map((e) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        if(defaultLanguage == 0){
+                                          defaultLanguage = 1;
+                                        } else {
+                                          defaultLanguage = 0;
+                                        }
+                                        setState(() {});
+                                        Navigator.pop(context, defaultLanguage);
+                                      },
+                                      child: Container(
+                                        height: 60,
+                                        width: double.maxFinite,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: defaultLanguage ==
+                                                    languageList.indexOf(e)
+                                                    ? Colors.green
+                                                    : Colors.black26),
+                                            borderRadius:
+                                            BorderRadius.circular(10),
+                                            color: defaultLanguage ==
+                                                languageList.indexOf(e)
+                                                ? Colors.green[50]
+                                                : Colors.transparent),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              e,
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.black45,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            defaultLanguage ==
+                                                languageList.indexOf(e) ? CircleAvatar(
+                                              maxRadius: 10,
+                                              backgroundColor: Colors.green[100],
+                                              child: const Icon(Icons.check, color: Colors.green, size: 12,),
+                                            ) : const SizedBox()
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              )
+                            ],
+                          ),
+
+                        ],
+                      ),
+                    );
+                  }),
+                );
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (BuildContext context) => dialogWithImage,
+                ).then((value) =>  setState(() {
+                        defaultLanguage = value;
+                }));
+              },
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.blue[100]),
-                padding: const EdgeInsets.all(3),
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
-                  children: const [
+                  children:  [
                     Text(
-                      'Eng',
-                      style: TextStyle(
+                     defaultLanguage == 0 ? 'Eng' : "हिन्दी",
+                      style: const TextStyle(
                           fontSize: 12,
                           color: Colors.blue,
                           fontWeight: FontWeight.w500),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.expand_more_sharp,
                       color: Colors.blue,
                     )
@@ -164,7 +300,7 @@ class _HomePageState extends State<HomePage> {
       ),
       backgroundColor: Colors.white,
       body: ListView(
-        children: [const Subject(), const Books(), const Projects()],
+        children: [ Subject(),  Books(),  Projects()],
       ),
       // : CircularProgressIndicator(),
       bottomNavigationBar: BottomNavigationBar(
