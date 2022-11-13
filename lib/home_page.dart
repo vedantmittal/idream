@@ -32,7 +32,10 @@ class _HomePageState extends State<HomePage> {
     "1st"
   ];
 
-  List<String> languageList = ["English is my preferred Language", "अंग्रेजी मेरी पसंदीदा भाषा है"];
+  List<String> languageList = [
+    "English is my preferred Language",
+    "अंग्रेजी मेरी पसंदीदा भाषा है"
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -52,92 +55,11 @@ class _HomePageState extends State<HomePage> {
           children: [
             GestureDetector(
               onTap: () {
-                final Dialog dialogWithImage = Dialog(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                  insetPadding:
-                      const EdgeInsets.symmetric(horizontal: 25, vertical: 24),
-                  child: StatefulBuilder(builder: (context, setState) {
-                    return Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Column(
-                            children: [
-                              Text(
-                                'Select Class',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6!
-                                    .copyWith(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.w500),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 20.0),
-                                child: Wrap(
-                                  runSpacing: 20,
-                                  spacing: 15,
-                                  children: classList.map((e) {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        defaultClassIndex =
-                                            classList.indexOf(e);
-                                        setState(() {});
-                                      },
-                                      child: Container(
-                                        height: 60,
-                                        width: 50,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: defaultClassIndex ==
-                                                        classList.indexOf(e)
-                                                    ? Colors.blue
-                                                    : Colors.black26),
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: defaultClassIndex ==
-                                                    classList.indexOf(e)
-                                                ? Colors.blue[50]
-                                                : Colors.transparent),
-                                        child: Center(
-                                          child: Text(
-                                            e,
-                                            style: const TextStyle(
-                                              fontSize: 16,
-                                              color: Colors.black45,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }).toList(),
-                                ),
-                              )
-                            ],
-                          ),
-                          ElevatedButton(
-                            onPressed: () => Navigator.pop(context),
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.grey[100],
-                                minimumSize: const Size(100, 40)),
-                            child: const Text(
-                              'Cancel',
-                              style: TextStyle(color: Colors.blue),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-                );
+                final Dialog dialogClass = classDialog();
                 showDialog(
                   context: context,
                   barrierDismissible: false,
-                  builder: (BuildContext context) => dialogWithImage,
+                  builder: (BuildContext context) => dialogClass,
                 );
               },
               child: Container(
@@ -147,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
-                  children:  [
+                  children: [
                     Text(
                       classList[defaultClassIndex],
                       style: const TextStyle(
@@ -168,98 +90,14 @@ class _HomePageState extends State<HomePage> {
             ),
             GestureDetector(
               onTap: () {
-                final Dialog dialogWithImage = Dialog(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                  insetPadding:
-                  const EdgeInsets.symmetric(horizontal: 25, vertical: 24),
-                  child: StatefulBuilder(builder: (context, setState) {
-                    return Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Column(
-                            children: [
-                              Text(
-                                'Choose your preferred Language',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6!
-                                    .copyWith(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500),
-                              ),
-
-
-                              Padding(
-                                padding:
-                                const EdgeInsets.symmetric(vertical: 20.0),
-                                child: Column(
-                                  children: languageList.map((e) {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        if(defaultLanguage == 0){
-                                          defaultLanguage = 1;
-                                        } else {
-                                          defaultLanguage = 0;
-                                        }
-                                        setState(() {});
-                                        Navigator.pop(context, defaultLanguage);
-                                      },
-                                      child: Container(
-                                        height: 60,
-                                        width: double.maxFinite,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: defaultLanguage ==
-                                                    languageList.indexOf(e)
-                                                    ? Colors.green
-                                                    : Colors.black26),
-                                            borderRadius:
-                                            BorderRadius.circular(10),
-                                            color: defaultLanguage ==
-                                                languageList.indexOf(e)
-                                                ? Colors.green[50]
-                                                : Colors.transparent),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              e,
-                                              style: const TextStyle(
-                                                fontSize: 16,
-                                                color: Colors.black45,
-                                              ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                            defaultLanguage ==
-                                                languageList.indexOf(e) ? CircleAvatar(
-                                              maxRadius: 10,
-                                              backgroundColor: Colors.green[100],
-                                              child: const Icon(Icons.check, color: Colors.green, size: 12,),
-                                            ) : const SizedBox()
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                  }).toList(),
-                                ),
-                              )
-                            ],
-                          ),
-
-                        ],
-                      ),
-                    );
-                  }),
-                );
+                final Dialog dialogLanguage = languageDialog();
                 showDialog(
                   context: context,
                   barrierDismissible: false,
-                  builder: (BuildContext context) => dialogWithImage,
-                ).then((value) =>  setState(() {
-                        defaultLanguage = value;
-                }));
+                  builder: (BuildContext context) => dialogLanguage,
+                ).then((value) => setState(() {
+                      defaultLanguage = value;
+                    }));
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -268,9 +106,9 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
-                  children:  [
+                  children: [
                     Text(
-                     defaultLanguage == 0 ? 'Eng' : "हिन्दी",
+                      defaultLanguage == 0 ? 'Eng' : "हिन्दी",
                       style: const TextStyle(
                           fontSize: 12,
                           color: Colors.blue,
@@ -300,7 +138,7 @@ class _HomePageState extends State<HomePage> {
       ),
       backgroundColor: Colors.white,
       body: ListView(
-        children: [ Subject(),  Books(),  Projects()],
+        children: [Subject(), Books(), Projects()],
       ),
       // : CircularProgressIndicator(),
       bottomNavigationBar: BottomNavigationBar(
@@ -331,6 +169,175 @@ class _HomePageState extends State<HomePage> {
         elevation: 5,
         backgroundColor: Colors.white,
       ),
+    );
+  }
+
+  Dialog classDialog() {
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      insetPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 24),
+      child: StatefulBuilder(builder: (context, setState) {
+        return Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Column(
+                children: [
+                  Text(
+                    'Select Class',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6!
+                        .copyWith(fontSize: 22, fontWeight: FontWeight.w500),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    child: Wrap(
+                      runSpacing: 20,
+                      spacing: 15,
+                      children: classList.map((e) {
+                        return GestureDetector(
+                          onTap: () {
+                            defaultClassIndex = classList.indexOf(e);
+                            setState(() {});
+                          },
+                          child: Container(
+                            height: 60,
+                            width: 50,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: defaultClassIndex ==
+                                            classList.indexOf(e)
+                                        ? Colors.blue
+                                        : Colors.black26),
+                                borderRadius: BorderRadius.circular(10),
+                                color: defaultClassIndex == classList.indexOf(e)
+                                    ? Colors.blue[50]
+                                    : Colors.transparent),
+                            child: Center(
+                              child: Text(
+                                e,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black45,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  )
+                ],
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.pop(context),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey[100],
+                    minimumSize: const Size(100, 40)),
+                child: const Text(
+                  'Cancel',
+                  style: TextStyle(color: Colors.blue),
+                ),
+              ),
+            ],
+          ),
+        );
+      }),
+    );
+  }
+
+  Dialog languageDialog() {
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      insetPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 24),
+      child: StatefulBuilder(builder: (context, setState) {
+        return Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Column(
+                children: [
+                  Text(
+                    'Choose your preferred Language',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6!
+                        .copyWith(fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    child: Column(
+                      children: languageList.map((e) {
+                        return GestureDetector(
+                          onTap: () {
+                            final value = languageList.indexOf(e);
+                            // if(defaultLanguage == 0){
+                            //   defaultLanguage = 1;
+                            // } else {
+                            //   defaultLanguage = 0;
+                            // }
+                            setState(() {});
+                            Navigator.pop(context, value);
+                          },
+                          child: Container(
+                            height: 60,
+                            width: double.maxFinite,
+                            margin: EdgeInsets.symmetric(vertical: 7),
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: defaultLanguage ==
+                                            languageList.indexOf(e)
+                                        ? Colors.green
+                                        : Colors.black26),
+                                borderRadius: BorderRadius.circular(10),
+                                color:
+                                    defaultLanguage == languageList.indexOf(e)
+                                        ? Colors.green[50]
+                                        : Colors.transparent),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    e,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.black45,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  defaultLanguage == languageList.indexOf(e)
+                                      ? CircleAvatar(
+                                          maxRadius: 10,
+                                          backgroundColor: Colors.green[100],
+                                          child: const Icon(
+                                            Icons.check,
+                                            color: Colors.green,
+                                            size: 12,
+                                          ),
+                                        )
+                                      : const SizedBox()
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+        );
+      }),
     );
   }
 }
