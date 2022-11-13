@@ -1,14 +1,11 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:idream/home/projects.dart';
-import 'package:idream/models/model.dart';
 
 import 'home/books.dart';
 import 'home/subjects.dart';
-import 'package:firebase_database/firebase_database.dart';
 
-FirebaseModel? firebaseModel;
+int defaultClassIndex = 4;
+int defaultLanguage = 1;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,39 +15,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  DatabaseReference dbRef = FirebaseDatabase.instance.ref('Idream');
-
   int _selectedIndex = 0;
 
-  Map<String, dynamic> dataValue = {};
-  int defaultClassIndex = 4;
-  int defaultLanguage = 0;
-
-  @override
-  void initState() {
-    retrieveData();
-    super.initState();
-  }
-
-  // Future<void> retrieveStudentData() async {
-  //   dbRef.get().whenComplete(() {
-  //
-  //   });
-  //   dbRef.child("Students").onChildAdded.listen((data) {
-  //     StudentData studentData = StudentData.fromJson(data.snapshot.value as Map);
-  //     Student student = Student(key: data.snapshot.key, studentData: studentData);
-  //     studentList.add(student);
-  //     setState(() {});
-  //   });
-  // }
-
-  Future<void> retrieveData() async {
-    DataSnapshot data = await dbRef.get();
-    dataValue = Map<String, dynamic>.from(data.value as Map);
-    setState(() {
-
-    });
-  }
+  List<String> classList = [
+    "12th",
+    "11th",
+    "10th",
+    "9th",
+    "8th",
+    "7th",
+    "6th",
+    "5th",
+    "4th",
+    "3rd",
+    "2nd",
+    "1st"
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -183,11 +163,10 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       backgroundColor: Colors.white,
-      body: dataValue.isNotEmpty
-          ? ListView(
-              children: [const Subject(), const Books(), const Projects()],
-            )
-          : CircularProgressIndicator(),
+      body: ListView(
+        children: [const Subject(), const Books(), const Projects()],
+      ),
+      // : CircularProgressIndicator(),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
